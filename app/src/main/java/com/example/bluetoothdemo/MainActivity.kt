@@ -1,11 +1,13 @@
 package com.example.bluetoothdemo
 
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.bluetoothdemo.databinding.ActivityMainBinding
 
 private lateinit var btPrint: BtPrint
+private lateinit var dialog: ProgressDialog
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +22,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         val stringToPrint = "print success" +
-                          "you are a winner"
+                "you are a winner"
+
+        fun dismissDialog() {
+            if (dialog.isShowing) dialog.dismiss()
+        }
 
         fun beginPrint() {
             if (result["success"] == false) {
@@ -42,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.printReceipt.setOnClickListener {
-            btPrint.doPrint(stringToPrint, true)
+            beginPrint()
         }
     }
 }
