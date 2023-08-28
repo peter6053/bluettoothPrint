@@ -29,26 +29,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun beginPrint() {
-            if (result["success"] == false) {
+            btPrint.socketConnect { result ->
+                if (result["success"] == false) {
 
-                this@MainActivity.runOnUiThread {
+                    this@MainActivity.runOnUiThread {
 
-                    binding.activityReprintPrintInfo.text = result["text"].toString()
-                    binding.activityReprintPrintSwitch.isChecked = false
+                        binding.activityReprintPrintInfo.text = result["text"].toString()
+                        binding.activityReprintPrintSwitch.isChecked = false
 
-                    dismissDialog()
-                    Toast.makeText(this, "Printer connection error...", Toast.LENGTH_SHORT).show()
+                        dismissDialog()
+                        Toast.makeText(this, "Printer connection error...", Toast.LENGTH_SHORT)
+                            .show()
 
-                    // TODO: Pooling?
+                        // TODO: Pooling?
 
+                    }
+                } else {
+                    btPrint.doPrint(stringToPrint, true)
                 }
-
-            } else {
-                btPrint.doPrint(stringToPrint, true)
             }
-        }
-        binding.printReceipt.setOnClickListener {
-            beginPrint()
+            binding.printReceipt.setOnClickListener {
+                beginPrint()
+            }
         }
     }
 }
