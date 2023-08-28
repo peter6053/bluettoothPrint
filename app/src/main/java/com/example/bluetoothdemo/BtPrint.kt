@@ -52,6 +52,7 @@ class BtPrint (
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d("sdk12uuuuuuuu4rr", "refreshPrinters: ${Build.VERSION.SDK_INT}")
 
         // btPrint.onRequPermissionsResult(requestCode, permissions as Array<String>, grantResults)
